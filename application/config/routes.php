@@ -17,6 +17,8 @@ $route['generate-barcode/(:any)'] = 'GenerateBarcode/generateBarcode/$1';
 $route['cms/dashboard'] = 'Cms/dashboard';
 $route['cms/all-peserta'] = 'Cms/all_peserta';
 $route['cms/peserta-hadir'] = 'Cms/peserta_hadir';
+$route['cms/peserta-instansi'] = 'Cms/peserta_instansi';
+$route['cms/peserta-umum'] = 'Cms/peserta_umum';
 $route['cms/undian'] = 'Cms/undian';
 $route['verifikasi-peserta/(:any)'] = 'Cms/verifikasi_peserta/$1';
 

@@ -56,6 +56,28 @@ class Cms extends CI_Controller
     $this->load->view('cms/templates/footer');
   }
 
+  public function peserta_instansi()
+  {
+    $data['hadir'] = $this->db->get_where('peserta', ['kategori' => 1])->result_array();
+    $id  = $this->session->userdata('id_user');
+    $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row();
+
+    $this->load->view('cms/templates/header', $data);
+    $this->load->view('cms/peserta_instansi');
+    $this->load->view('cms/templates/footer');
+  }
+
+  public function peserta_umum()
+  {
+    $data['hadir'] = $this->db->get_where('peserta', ['kategori' => 2])->result_array();
+    $id  = $this->session->userdata('id_user');
+    $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row();
+
+    $this->load->view('cms/templates/header', $data);
+    $this->load->view('cms/peserta_umum');
+    $this->load->view('cms/templates/footer');
+  }
+
   public function verifikasi_peserta($unix)
   {
     $query = $this->db->get_where('peserta', ['unix_code' => $unix])->row();

@@ -5,13 +5,14 @@
         <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="table-responsive p-3">
-                    <h1 class="btn btn-lg btn-success mb-4">Data Peserta Hadir</h1>
+                    <h1 class="btn btn-success mb-4">Data Peserta Hadir</h1>
                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                         <thead class="thead-light">
                             <tr>
                                 <th>Nomor Peserta</th>
                                 <th>Nama Peserta</th>
-                                <th>Instansi</th>
+                                <th>Kategori</th>
+                                <th>Asal</th>
                                 <th>Nomor HP</th>
                                 <th>Present</th>
                                 <th>QR Code</th>
@@ -22,7 +23,9 @@
                                 <tr>
                                     <td><b><?= $row['nomor_urut']; ?></b></td>
                                     <td><?= $row['nama_peserta']; ?></td>
-                                    <td><?= $row['instansi']; ?></td>
+                                    <?php $kategori = ($row['kategori'] == 1) ? 'Instansi' : 'Umum'; ?>
+                                    <td><?= $kategori; ?></td>
+                                    <td><?= $row['alamat']; ?></td>
                                     <td><?= $row['nomor_hp']; ?></td>
                                     <td><?= date('d-m-Y H:i', $row['time_hadir']); ?> wib</td>
                                     <td>

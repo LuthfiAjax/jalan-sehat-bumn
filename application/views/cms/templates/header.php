@@ -35,7 +35,7 @@
             <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('cms/all-peserta'); ?>">
-                    <i class="fas fa-fw fa-users text-primary"></i>
+                    <i class="fas fa-fw fa-users text-warning"></i>
                     <span>Seluruh Peserta</span></a>
             </li>
             <hr class="sidebar-divider">
@@ -43,6 +43,18 @@
                 <a class="nav-link" href="<?= base_url('cms/peserta-hadir'); ?>">
                     <i class="fas fa-fw fa-users text-success"></i>
                     <span>Peserta Hadir</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('cms/peserta-instansi'); ?>">
+                    <i class="fas fa-fw fa-users text-primary"></i>
+                    <span>Peserta Instansi</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('cms/peserta-umum'); ?>">
+                    <i class="fas fa-fw fa-users text-danger"></i>
+                    <span>Peserta Umum</span></a>
             </li>
             <hr class="sidebar-divider">
         </ul>

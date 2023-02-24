@@ -2,7 +2,7 @@
     <?= $this->session->flashdata('message'); ?>
     <div class="row mb-3">
         <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
                     <a href="#" id="scan" style="text-decoration: none;">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
                     <a href="#" data-toggle="modal" data-target="#undian" style="text-decoration: none;">
@@ -45,7 +45,7 @@
                     <a href="<?= base_url('cms/all-peserta'); ?>" style="text-decoration: none;">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs text-dark font-weight-bold text-uppercase mb-1">Total Peserta</div>
+                                <div class="text-xs text-dark font-weight-bold text-uppercase mb-1">Total Seluruh Peserta</div>
                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $this->db->get('peserta')->num_rows(); ?></div>
                             </div>
                             <div class="col-auto">
@@ -73,6 +73,40 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <a href="<?= base_url('cms/peserta-instansi'); ?>" style="text-decoration: none;">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs text-dark font-weight-bold text-uppercase mb-1">Total Peserta Instansi</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $this->db->get_where('peserta', ['kategori' => 1])->num_rows(); ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-4x text-primary"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <a href="<?= base_url('cms/peserta-umum'); ?>" style="text-decoration: none;">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs text-dark font-weight-bold text-uppercase mb-1">Total Peserta Umum</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $this->db->get_where('peserta', ['kategori' => 2])->num_rows(); ?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-4x text-danger"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <div class="col-lg-12">
             <div class="card mb-4">
@@ -83,7 +117,8 @@
                             <tr>
                                 <th>Nomor Peserta</th>
                                 <th>Nama Peserta</th>
-                                <th>Instansi</th>
+                                <th>Kategori</th>
+                                <th>Asal</th>
                                 <th>Nomor HP</th>
                                 <th>Registrasi</th>
                                 <th>QR-Code</th>
@@ -94,7 +129,9 @@
                                 <tr>
                                     <td><b><?= $row['nomor_urut']; ?></b></td>
                                     <td><?= $row['nama_peserta']; ?></td>
-                                    <td><?= $row['instansi']; ?></td>
+                                    <?php $kategori = ($row['kategori'] == 1) ? 'Instansi' : 'Umum'; ?>
+                                    <td><?= $kategori; ?></td>
+                                    <td><?= $row['alamat']; ?></td>
                                     <td><?= $row['nomor_hp']; ?></td>
                                     <td><?= date('d-m-Y H:i', $row['created']); ?> wib</td>
                                     <td>
