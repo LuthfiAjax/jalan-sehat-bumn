@@ -10,7 +10,7 @@ $route['undian'] = 'Welcome/undian';
 $route['daftar/peserta'] = 'Welcome/daftar';
 $route['bukti-daftar/(:any)'] = 'Welcome/bukti_daftar/$1';
 
-
+// tridparty
 $route['generate-barcode/(:any)'] = 'GenerateBarcode/generateBarcode/$1';
 
 // cms

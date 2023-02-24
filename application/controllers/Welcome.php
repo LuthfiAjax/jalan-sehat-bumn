@@ -13,7 +13,18 @@ class Welcome extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('welcome');
+		$this->load->library('devicedetector');
+		$detector = new DeviceDetector();
+
+		$device_type = $detector->get_device_type();
+
+		if ($detector->is_mobile()) {
+			$this->load->view('welcome');
+		} elseif ($detector->is_tablet()) {
+			$this->load->view('dekstop');
+		} else {
+			$this->load->view('dekstop');
+		}
 	}
 
 	public function undian()
@@ -25,34 +36,62 @@ class Welcome extends CI_Controller
 	public function daftar()
 	{
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
-		$this->form_validation->set_rules('no_hp', 'Nomor HP', 'trim|required|is_unique[peserta.nomor_hp]', [
-			'is_unique' => 'Nomor HP ini telah Digunakan mendaftar sebelumnya'
-		]);
+		$this->form_validation->set_rules('no_hp', 'Nomor HP', 'trim|required');
 		$this->form_validation->set_rules('instansi', 'Instansi', 'trim|required');
 
-		$nama = $this->input->post('nama', true);
+		// cek no HP
 		$no_hp = $this->input->post('no_hp', true);
-		$instansi = $this->input->post('instansi', true);
+		$query = $this->db->get_where('peserta', ['nomor_hp' => $no_hp])->row();
+		if ($query != null) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger mx-2 mt-2" role="alert">Nomor HP telah digunakan mendaftar sebelumnya, silahkan gunakan nomor HP lain</div>');
+			redirect(base_url(''));
+		}
+
+		// get data input
+		$nama = $this->input->post('nama', true);
+		$alamat = $this->input->post('alamat', true);
+		$pilih = $this->input->post('pilih');
+
+		$alamat_perusahaan = $this->input->post('alamat_perusahaan');
+		$alamat_desa = $this->input->post('alamat_desa');
+		$alamat = ($pilih == 1) ? $alamat_perusahaan : $alamat_desa;
 
 		$unix =  md5('' . $no_hp);
 
-		// Mendapatkan nomor urut terakhir dari database
-		$get = $this->peserta->getNomor();
+		// generate nomor
+		$get = ($pilih == 1) ? $this->peserta->getNomorInstansi() : $this->peserta->getNomorUmum();
 		$last_id = $get->nomor_urut;
 
 		if (!$last_id) {
-			$nomor_urut = '00001';
+			$nomor = ($pilih == 1) ? '00001' : '01501';
 		} else {
 			$next_id = $last_id + 1;
-			$nomor_urut = str_pad($next_id, 5, '0', STR_PAD_LEFT);
+			if ($pilih == 1) {
+				if ($next_id > 1500) {
+					// Jika nomor_urut sudah mencapai 1500, kembalikan pesan kesalahan
+					return "Nomor urut untuk instansi sudah mencapai batas maksimum";
+				}
+				$nomor = str_pad($next_id, 5, '0', STR_PAD_LEFT);
+			} else {
+				if ($next_id > 4000) {
+					// Jika nomor_urut sudah mencapai 4000, kembalikan pesan kesalahan
+					return "Nomor urut untuk umum sudah mencapai batas maksimum";
+				}
+				$nomor = str_pad($next_id + 1500, 5, '0', STR_PAD_LEFT);
+				// Jika nomor_urut lebih besar dari 1501, kurangi dengan 1500
+				if ($next_id > 1501) {
+					$nomor = str_pad($next_id + 0, 5, '0', STR_PAD_LEFT);
+				}
+			}
 		}
 
 		$data = [
 			'nama_peserta' => htmlspecialchars($nama),
 			'nomor_hp' => htmlspecialchars($no_hp),
-			'instansi' => htmlspecialchars($instansi),
+			'kategori' => htmlspecialchars($pilih),
+			'alamat' => htmlspecialchars($alamat),
 			'barcode' => null,
-			'nomor_urut' => $nomor_urut,
+			'nomor_urut' => $nomor,
 			'created' => time(),
 			'unix_code' => $unix
 		];
@@ -63,8 +102,18 @@ class Welcome extends CI_Controller
 
 	public function bukti_daftar($unix)
 	{
+		$this->load->library('devicedetector');
+		$detector = new DeviceDetector();
+
+		$device_type = $detector->get_device_type();
 		$data['personal'] =  $this->db->get_where('peserta', ['unix_code' => $unix])->row();
 
-		$this->load->view('bukti_daftar', $data);
+		if ($detector->is_mobile()) {
+			$this->load->view('bukti_daftar', $data);
+		} elseif ($detector->is_tablet()) {
+			$this->load->view('bukti_daftar', $data);
+		} else {
+			$this->load->view('dekstop');
+		}
 	}
 }

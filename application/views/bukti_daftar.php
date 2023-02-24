@@ -7,6 +7,7 @@
     <title>Jalan Sehat Bersama BUMN | Grobogan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/x-icon" href="<?= base_url('assets/images/faveicon.png'); ?>">
 </head>
 
@@ -46,10 +47,15 @@
                         <img src="<?= base_url('assets/images/barcode/' . $personal->barcode); ?>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 style="text-transform: uppercase;" class="card-title text-center"><b><?= $personal->nama_peserta; ?></b></h5>
+                            <?php
+                            $color = ($personal->kategori == 1) ? '#0E2B3E' : '#E6202B';
+                            $text = ($personal->kategori == 1) ? "FREE KAOS <i class='fa-solid fa-shirt'></i>" : "";
+                            ?>
+                            <h6 class="text-center"><small class="text-primary"><?= $text; ?> </small></h6>
                             <p class="card-text text-center fw-semibold">Nomor Pendaftaran</p>
                         </div>
-                        <div class="card-footer bg-primary">
-                            <p class="text-center text-light fs-4"><b><?= $personal->nomor_urut; ?></b></p>
+                        <div class="card-footer" style="background-color: <?= $color; ?>;">
+                            <p class="text-center text-light fs-3"><b><?= $personal->nomor_urut; ?></b></p>
                         </div>
                     </div>
                 </div>
@@ -72,7 +78,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" integrity="sha512-2bMhOkE/ACz21dJT8zBOMgMecNxx0d37NND803ExktKiKdSzdwn+L7i9fdccw/3V06gM/DBWKbYmQvKMdAA9Nw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
     <script>

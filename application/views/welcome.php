@@ -14,21 +14,43 @@
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
 		<div class="container-fluid">
 			<style>
-				.navbar-brand img {
-					max-width: 100%;
-					height: auto;
-				}
+				/* CSS untuk ukuran mobile */
+				@media (max-width: 576px) {
 
-				body {
-					background: linear-gradient(to bottom right, #B0DDE4, #FEFFFF);
-				}
+					/* Navbar logo */
+					.navbar-brand img {
+						max-width: 100%;
+						height: auto;
+					}
 
-				#title {
-					color: #219AA9;
-					font-size: 2rem;
-					font-weight: bold;
-					text-transform: uppercase;
-					letter-spacing: 2px;
+					body {
+						background: linear-gradient(to bottom right, #B0DDE4, #FEFFFF);
+					}
+
+					#title {
+						color: #219AA9;
+						font-size: 2rem;
+						font-weight: bold;
+						text-transform: uppercase;
+						letter-spacing: 2px;
+					}
+
+					/* Padding untuk container */
+					.container {
+						padding-left: 15px;
+						padding-right: 15px;
+					}
+
+					/* Padding untuk container-fluid */
+					.container-fluid {
+						padding-left: 15px;
+						padding-right: 15px;
+					}
+
+					/* Padding untuk content-form-login */
+					.content-form-login {
+						padding: 10px;
+					}
 				}
 			</style>
 			<!-- Navbar logo -->
@@ -48,6 +70,9 @@
 		<div class="d-flex justify-content-center align-items-center  ">
 			<div class="content-form-login" style="background: white;box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);border-radius: 5px;">
 				<h1 id="title" class="text-center mt-3 mb-0">Registrasi</h1>
+
+				<?= $this->session->flashdata('message'); ?>
+
 				<form id="form-login-data" class="p-4" action="<?= base_url('daftar/peserta'); ?>" method="POST">
 					<div class="row pt-3 m-0">
 						<div class="col-sm-12 p-0 mt-2">
@@ -65,11 +90,28 @@
 						<div class="col-sm-12 p-0 mt-2">
 							<div class="form-group">
 								<label>Instansi / Umum <span class="text-danger">*</span></label>
-								<input id="instansi" type="text" name="instansi" class="form-control" placeholder="Masukan Instansi / Umum" autocomplete="off" required>
+								<select class="form-control" id="pilih" name="pilih" aria-label="Default select example">
+									<option disabled selected>Pilih</option>
+									<option value="1">Instansi</option>
+									<option value="2">Umum</option>
+								</select>
+							</div>
+						</div>
+						<div id="form-perusahaan" class="col-sm-12 p-0 mt-2" style="display:none;">
+							<div class="form-group">
+								<label>Nama Perusahaan / Organisasi <span class="text-danger">*</span></label>
+								<input id="alamat-perusahaan" type="text" name="alamat_perusahaan" class="form-control" placeholder="Perusahaan / Organisasi" autocomplete="off">
+							</div>
+						</div>
+
+						<div id="form-desa" class="col-sm-12 p-0 mt-2" style="display:none;">
+							<div class="form-group">
+								<label>Desa / Kelurahan <span class="text-danger">*</span></label>
+								<input id="alamat-desa" type="text" name="alamat_desa" class="form-control" placeholder="Dari Desa / Kelurahan" autocomplete="off">
 							</div>
 						</div>
 						<br>
-						<div class="col-lg-12 mt-3">
+						<div class="col-lg-12 mt-5">
 							<div class="row">
 								<div class="col-12">
 									<div class="d-flex justify-content-center">
@@ -83,6 +125,24 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		var pilih = document.getElementById("pilih");
+		var formPerusahaan = document.getElementById("form-perusahaan");
+		var formDesa = document.getElementById("form-desa");
+		pilih.addEventListener("change", function() {
+			if (pilih.value == 1) {
+				formPerusahaan.style.display = "block";
+				formDesa.style.display = "none";
+			} else if (pilih.value == 2) {
+				formPerusahaan.style.display = "none";
+				formDesa.style.display = "block";
+			} else {
+				formPerusahaan.style.display = "none";
+				formDesa.style.display = "none";
+			}
+		});
+	</script>
 
 	<footer class="sticky-bottom bg-light py-1 mt-4">
 		<div class="container">

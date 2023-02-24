@@ -35,15 +35,17 @@
 
         #result {
             display: inline-block;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
+            width: 650px;
+            height: 150px;
+            border-radius: 20px;
             background-color: #333;
             color: #fff;
-            font-size: 72px;
+            font-size: 70px;
+            font-family: Arial Black, Arial Bold, Gadget, sans-serif;
             text-align: center;
-            line-height: 200px;
+            line-height: 150px;
             text-align: center;
+            letter-spacing: 30px;
         }
     </style>
 </head>
@@ -51,40 +53,45 @@
 <body>
     <div class="container-xxl">
         <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="app-brand justify-content-center">
-                            <a href="index.html" class="app-brand-link gap-2">
-                                <img src="<?= base_url('assets/images/webp/jalan.webp'); ?>" alt="logo R17" width="100%">
-                                <style>
-                                    .logo {
-                                        width: 250px;
-                                    }
-                                </style>
-                            </a>
-                        </div>
-                        <div class="container">
-                            <div id="result"></div>
-                        </div>
-                        <form id="formAuthentication" class="mb-3" method="POST">
-
-                            <div class="mb-3">
-                                <input class="form-control" type="hidden" id="start" value="<?= $undian->start; ?>" name="start" />
-                            </div>
-                            <div class="mb-3">
-                                <input class="form-control" type="hidden" id="finish" value="<?= $undian->finish; ?>" name="finish" />
-                            </div>
-                            <div class="mb-3">
-                                <input class="form-control" type="hidden" id="seconds" value="<?= $undian->time; ?>" name="seconds" />
-                            </div>
-
-                            <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="button" id="generateButton">Undi Nomor</button>
-                            </div>
-                        </form>
-
+            <div class="card" style="margin-left: 300px;margin-right: 300px;">
+                <div class="card-body">
+                    <div class="app-brand justify-content-center mb-5">
+                        <a href="" class="app-brand-link gap-2">
+                            <img src="<?= base_url('assets/images/webp/jalan.webp'); ?>" alt="logo R17" width="100%">
+                            <style>
+                                .logo {
+                                    width: 250px;
+                                }
+                            </style>
+                        </a>
                     </div>
+                    <div class="container">
+                        <div id="result"></div>
+                    </div>
+                    <form id="formAuthentication" class="mb-3" method="POST">
+
+                        <div class="mb-3">
+                            <input class="form-control" type="hidden" id="start" value="<?= $undian->start; ?>" name="start" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="hidden" id="finish" value="<?= $undian->finish; ?>" name="finish" />
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="hidden" id="seconds" value="<?= $undian->time; ?>" name="seconds" />
+                        </div>
+                        <style>
+                            #btn {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                /* Optional, to center vertically within viewport */
+                            }
+                        </style>
+
+                        <div id="btn" class="mx-5 my-5 text-center">
+                            <button class="btn btn-lg rounded btn-primary d-grid w-75" type="button" id="generateButton">Undi Nomor</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
