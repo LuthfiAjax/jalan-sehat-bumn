@@ -117,11 +117,12 @@
                             <tr>
                                 <th>Nomor Peserta</th>
                                 <th>Nama Peserta</th>
+                                <th>KTP</th>
                                 <th>Kategori</th>
                                 <th>Asal</th>
                                 <th>Nomor HP</th>
                                 <th>Registrasi</th>
-                                <th>QR-Code</th>
+                                <th>QR</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,6 +130,7 @@
                                 <tr>
                                     <td><b><?= $row['nomor_urut']; ?></b></td>
                                     <td><?= $row['nama_peserta']; ?></td>
+                                    <td><?= $row['ktp']; ?></td>
                                     <?php $kategori = ($row['kategori'] == 1) ? 'Instansi' : 'Umum'; ?>
                                     <td><?= $kategori; ?></td>
                                     <td><?= $row['alamat']; ?></td>

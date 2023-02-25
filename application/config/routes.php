@@ -9,9 +9,14 @@ $route['translate_uri_dashes'] = FALSE;
 $route['undian'] = 'Welcome/undian';
 $route['daftar/peserta'] = 'Welcome/daftar';
 $route['bukti-daftar/(:any)'] = 'Welcome/bukti_daftar/$1';
+$route['kouta-daftar-terpenuhi'] = 'Welcome/limit';
 
 // tridparty
 $route['generate-barcode/(:any)'] = 'GenerateBarcode/generateBarcode/$1';
+$route['download/all-data'] = 'ConverExcel/all_data';
+$route['download/hadir-data'] = 'ConverExcel/hadir_data';
+$route['download/instansi-data'] = 'ConverExcel/instansi_data';
+$route['download/umum-data'] = 'ConverExcel/umum_data';
 
 // cms
 $route['cms/dashboard'] = 'Cms/dashboard';

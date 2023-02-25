@@ -56,6 +56,7 @@
                         </div>
                         <div class="card-footer" style="background-color: <?= $color; ?>;">
                             <p class="text-center text-light fs-3"><b><?= $personal->nomor_urut; ?></b></p>
+                            <small class="text-start text-light"><b>Catatan</b> : Mohon bawa KTP saat verifikasi data.</small>
                         </div>
                     </div>
                 </div>

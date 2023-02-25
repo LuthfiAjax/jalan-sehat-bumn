@@ -6,6 +6,7 @@
             <div class="card mb-4">
                 <div class="table-responsive p-3">
                     <h1 class="btn btn-warning mb-4">Data Seluruh Peserta</h1>
+                    <a class="btn btn-success mb-4" href="<?= base_url('download/all-data'); ?>">Download</a>
                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                         <thead class="thead-light">
                             <tr>

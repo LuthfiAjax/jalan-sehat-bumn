@@ -77,8 +77,30 @@
 					<div class="row pt-3 m-0">
 						<div class="col-sm-12 p-0 mt-2">
 							<div class="form-group">
-								<label>Nama <span class="text-danger">*</span></label>
-								<input id="nama" type="text" name="nama" class="form-control" placeholder="Masukan email anda" autocomplete="off" required>
+								<label>Nama sesuai KTP <span class="text-danger">*</span></label>
+								<input id="nama" type="text" name="nama" class="form-control" placeholder="Masukan Nama anda" autocomplete="off" required>
+							</div>
+						</div>
+						<div class="col-sm-12 p-0 mt-2">
+							<div class="form-group">
+								<label>Nomor KTP <span class="text-danger">*</span></label>
+								<input id="ktp" type="number" name="ktp" class="form-control" onchange="validasiKTP()" placeholder="16 Digit" autocomplete="off" minlength="16" maxlength="16" required>
+								<style>
+									#ktp-message {
+										font-size: small;
+										font-weight: bold;
+									}
+
+									#ktp-message.invalid {
+										color: red;
+									}
+
+									#ktp-message.valid {
+										color: green;
+									}
+								</style>
+
+								<small id="ktp-message"></small>
 							</div>
 						</div>
 						<div class="col-sm-12 p-0 mt-2">
@@ -99,8 +121,8 @@
 						</div>
 						<div id="form-perusahaan" class="col-sm-12 p-0 mt-2" style="display:none;">
 							<div class="form-group">
-								<label>Nama Perusahaan / Organisasi <span class="text-danger">*</span></label>
-								<input id="alamat-perusahaan" type="text" name="alamat_perusahaan" class="form-control" placeholder="Perusahaan / Organisasi" autocomplete="off">
+								<label>Instansi / Organisasi <span class="text-danger">*</span></label>
+								<input id="alamat-perusahaan" type="text" name="alamat_perusahaan" class="form-control" placeholder="Dari Instansi / Organisasi" autocomplete="off">
 							</div>
 						</div>
 
@@ -125,18 +147,41 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		function validasiKTP() {
+			var ktp = document.getElementById("ktp").value;
+			var ktpMessage = document.getElementById("ktp-message");
+			if (ktp.toString().length !== 16) {
+				ktpMessage.innerText = "Nomor KTP Tidak Valid";
+				ktpMessage.classList.remove("valid");
+				ktpMessage.classList.add("invalid");
+				document.getElementById("ktp").setCustomValidity("Nomor KTP terdiri dari 16 digit.");
+			} else {
+				ktpMessage.innerText = "Nomor KTP Valid";
+				ktpMessage.classList.remove("invalid");
+				ktpMessage.classList.add("valid");
+				document.getElementById("ktp").setCustomValidity("");
+			}
+		}
+	</script>
 
 	<script>
 		var pilih = document.getElementById("pilih");
 		var formPerusahaan = document.getElementById("form-perusahaan");
 		var formDesa = document.getElementById("form-desa");
+		var inputPerusahaan = document.getElementById("alamat-perusahaan");
+		var inputDesa = document.getElementById("alamat-desa");
 		pilih.addEventListener("change", function() {
 			if (pilih.value == 1) {
 				formPerusahaan.style.display = "block";
 				formDesa.style.display = "none";
+				inputPerusahaan.required = true;
+				inputDesa.required = false;
 			} else if (pilih.value == 2) {
 				formPerusahaan.style.display = "none";
 				formDesa.style.display = "block";
+				inputPerusahaan.required = false;
+				inputDesa.required = true;
 			} else {
 				formPerusahaan.style.display = "none";
 				formDesa.style.display = "none";

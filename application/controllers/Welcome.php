@@ -38,12 +38,21 @@ class Welcome extends CI_Controller
 		$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
 		$this->form_validation->set_rules('no_hp', 'Nomor HP', 'trim|required');
 		$this->form_validation->set_rules('instansi', 'Instansi', 'trim|required');
+		$this->form_validation->set_rules('ktp', 'KTP', 'trim|required');
 
 		// cek no HP
 		$no_hp = $this->input->post('no_hp', true);
+		$ktp = $this->input->post('ktp', true);
+
 		$query = $this->db->get_where('peserta', ['nomor_hp' => $no_hp])->row();
+		$query2 = $this->db->get_where('peserta', ['ktp' => $ktp])->row();
+
 		if ($query != null) {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger mx-2 mt-2" role="alert">Nomor HP telah digunakan mendaftar sebelumnya, silahkan gunakan nomor HP lain</div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-danger mx-2 mt-2" role="alert">Nomor HP Anda telah digunakan mendaftar sebelumnya</div>');
+			redirect(base_url(''));
+		}
+		if ($query2 != null) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger mx-2 mt-2" role="alert">KTP anda telah digunakan mendaftar sebelumnya</div>');
 			redirect(base_url(''));
 		}
 
@@ -68,14 +77,12 @@ class Welcome extends CI_Controller
 			$next_id = $last_id + 1;
 			if ($pilih == 1) {
 				if ($next_id > 1500) {
-					// Jika nomor_urut sudah mencapai 1500, kembalikan pesan kesalahan
-					return "Nomor urut untuk instansi sudah mencapai batas maksimum";
+					redirect(base_url('kouta-daftar-terpenuhi'));
 				}
 				$nomor = str_pad($next_id, 5, '0', STR_PAD_LEFT);
 			} else {
-				if ($next_id > 4000) {
-					// Jika nomor_urut sudah mencapai 4000, kembalikan pesan kesalahan
-					return "Nomor urut untuk umum sudah mencapai batas maksimum";
+				if ($next_id > 3500) {
+					redirect(base_url('kouta-daftar-terpenuhi'));
 				}
 				$nomor = str_pad($next_id + 1500, 5, '0', STR_PAD_LEFT);
 				// Jika nomor_urut lebih besar dari 1501, kurangi dengan 1500
@@ -88,6 +95,7 @@ class Welcome extends CI_Controller
 		$data = [
 			'nama_peserta' => htmlspecialchars($nama),
 			'nomor_hp' => htmlspecialchars($no_hp),
+			'ktp' => htmlspecialchars($ktp),
 			'kategori' => htmlspecialchars($pilih),
 			'alamat' => htmlspecialchars($alamat),
 			'barcode' => null,
@@ -115,5 +123,10 @@ class Welcome extends CI_Controller
 		} else {
 			$this->load->view('dekstop');
 		}
+	}
+
+	public function limit()
+	{
+		$this->load->view('limit');
 	}
 }
