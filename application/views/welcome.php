@@ -72,7 +72,20 @@
 				<h1 id="title" class="text-center mt-3 mb-0">Registrasi</h1>
 
 				<?= $this->session->flashdata('message'); ?>
+				<style>
+					#ktp-message {
+						font-size: small;
+						font-weight: bold;
+					}
 
+					#ktp-message.invalid {
+						color: red;
+					}
+
+					#ktp-message.valid {
+						color: green;
+					}
+				</style>
 				<form id="form-login-data" class="p-4" action="<?= base_url('daftar/peserta'); ?>" method="POST">
 					<div class="row pt-3 m-0">
 						<div class="col-sm-12 p-0 mt-2">
@@ -83,23 +96,8 @@
 						</div>
 						<div class="col-sm-12 p-0 mt-2">
 							<div class="form-group">
-								<label>Nomor KTP <span class="text-danger">*</span></label>
-								<input id="ktp" type="number" name="ktp" class="form-control" onchange="validasiKTP()" placeholder="16 Digit" autocomplete="off" minlength="16" maxlength="16" required>
-								<style>
-									#ktp-message {
-										font-size: small;
-										font-weight: bold;
-									}
-
-									#ktp-message.invalid {
-										color: red;
-									}
-
-									#ktp-message.valid {
-										color: green;
-									}
-								</style>
-
+								<label>KTP / Kartu Identitas<span class="text-danger">*</span></label>
+								<input id="ktp" type="number" name="ktp" class="form-control" onchange="validasiKTP()" placeholder="Nomor KTP / kartu identitas" autocomplete="off" minlength="16" maxlength="16" required>
 								<small id="ktp-message"></small>
 							</div>
 						</div>
@@ -132,6 +130,10 @@
 								<input id="alamat-desa" type="text" name="alamat_desa" class="form-control" placeholder="Dari Desa / Kelurahan" autocomplete="off">
 							</div>
 						</div>
+						<div class="mb-3 form-check mt-2">
+							<input type="checkbox" class="form-check-input" id="modalCheck">
+							<label class="form-check-label" for="modalCheck" required>Lihat pengumuman <span class="text-danger">*</span></label>
+						</div>
 						<br>
 						<div class="col-lg-12 mt-5">
 							<div class="row">
@@ -144,9 +146,52 @@
 						</div>
 					</div>
 				</form>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Pengumuman</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body text-justify">
+								Harap mengisi semua komponen dengan lengkap dan benar karena akan ada validasi saat registrasi ulang pada tanggal 5 Maret 2023 pukul 05.00 sampai 05.45 di Alun-alun Purwodadi.<br><br>
+								Mohon diingatkan untuk membawa Bukti pendaftaran yang terdapat QR Code dan KTP saat hari-H.
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	</div>
+	<footer class="sticky-bottom bg-light py-1 mt-4">
+		<div class="container">
+			<div class="row">
+				<div class="container text-center py-3">
+					<img src="<?= base_url('assets/images/logo-panjang-hitam.png'); ?>" alt="Organized by logo" height="24">
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+	<script>
+		var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+		var modalCheck = document.getElementById('modalCheck');
+		modalCheck.addEventListener('click', function() {
+			if (modalCheck.checked) {
+				myModal.show();
+			} else {
+				myModal.hide();
+			}
+		})
+	</script>
 	<script>
 		function validasiKTP() {
 			var ktp = document.getElementById("ktp").value;
@@ -155,7 +200,7 @@
 				ktpMessage.innerText = "Nomor KTP Tidak Valid";
 				ktpMessage.classList.remove("valid");
 				ktpMessage.classList.add("invalid");
-				document.getElementById("ktp").setCustomValidity("Nomor KTP terdiri dari 16 digit.");
+				document.getElementById("ktp").setCustomValidity("Terdiri dari 16 digit.");
 			} else {
 				ktpMessage.innerText = "Nomor KTP Valid";
 				ktpMessage.classList.remove("invalid");
@@ -164,7 +209,6 @@
 			}
 		}
 	</script>
-
 	<script>
 		var pilih = document.getElementById("pilih");
 		var formPerusahaan = document.getElementById("form-perusahaan");
@@ -188,20 +232,6 @@
 			}
 		});
 	</script>
-
-	<footer class="sticky-bottom bg-light py-1 mt-4">
-		<div class="container">
-			<div class="row">
-				<div class="container text-center py-3">
-					<img src="<?= base_url('assets/images/logo-panjang-hitam.png'); ?>" alt="Organized by logo" height="24">
-				</div>
-			</div>
-		</div>
-	</footer>
-
-
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 
 </html>
