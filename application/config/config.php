@@ -24,8 +24,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://localhost/jalansehat/';
-$config['base_url'] = 'http://192.168.0.106/jalansehat/';
-// $config['base_url'] = 'http://jalansehat.test/';
+// $config['base_url'] = 'http://192.168.0.106/jalansehat/';
+$config['base_url'] = 'http://jalansehat.test/';
 
 /*
 |--------------------------------------------------------------------------
@@ -443,7 +443,7 @@ $config['standardize_newlines'] = FALSE;
 |          for backwards compatibility purposes!
 |
 */
-$config['global_xss_filtering'] = FALSE;
+$config['global_xss_filtering'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

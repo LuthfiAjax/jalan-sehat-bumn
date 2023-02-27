@@ -35,4 +35,10 @@ class Peserta_model extends CI_Model
     $query = $this->db->get();
     return $query->row();
   }
+
+  public function getCurrentPeserta($mulai, $sampai)
+  {
+    $query = "SELECT * FROM peserta WHERE created >= '$mulai' AND created <= '$sampai'";
+    return $this->db->query($query);
+  }
 }

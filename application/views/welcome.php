@@ -91,20 +91,23 @@
 						<div class="col-sm-12 p-0 mt-2">
 							<div class="form-group">
 								<label>Nama sesuai KTP <span class="text-danger">*</span></label>
-								<input id="nama" type="text" name="nama" class="form-control" placeholder="Masukan Nama anda" autocomplete="off" required>
+								<input id="nama" type="text" name="nama" class="form-control" placeholder="Masukan Nama anda" autocomplete="off" value="<?= set_value('nama'); ?>" required>
+								<?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>
 							</div>
 						</div>
 						<div class="col-sm-12 p-0 mt-2">
 							<div class="form-group">
 								<label>KTP / Kartu Identitas<span class="text-danger">*</span></label>
-								<input id="ktp" type="number" name="ktp" class="form-control" onchange="validasiKTP()" placeholder="Nomor KTP / kartu identitas" autocomplete="off" minlength="16" maxlength="16" required>
+								<input id="ktp" type="number" name="ktp" class="form-control" value="<?= set_value('ktp'); ?>" onchange="validasiKTP()" placeholder="Nomor KTP / kartu identitas" autocomplete="off" minlength="16" maxlength="16" required>
+								<?= form_error('ktp', '<small class="text-danger pl-3">', '</small>'); ?>
 								<small id="ktp-message"></small>
 							</div>
 						</div>
 						<div class="col-sm-12 p-0 mt-2">
 							<div class="form-group">
 								<label>Nomor HP <span class="text-danger">*</span></label>
-								<input id="no_hp" type="number" name="no_hp" class="form-control" placeholder="Masukan nomor HP" autocomplete="off" required>
+								<input id="no_hp" type="number" name="no_hp" class="form-control" placeholder="Masukan nomor HP" value="<?= set_value('no_hp'); ?>" autocomplete="off" required>
+								<?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
 							</div>
 						</div>
 						<div class="col-sm-12 p-0 mt-2">
@@ -119,8 +122,8 @@
 						</div>
 						<div id="form-perusahaan" class="col-sm-12 p-0 mt-2" style="display:none;">
 							<div class="form-group">
-								<label>Instansi / Organisasi <span class="text-danger">*</span></label>
-								<input id="alamat-perusahaan" type="text" name="alamat_perusahaan" class="form-control" placeholder="Dari Instansi / Organisasi" autocomplete="off">
+								<label>Instansi / Organisasi <span class="text-danger">(Tutup)</span></label>
+								<input id="alamat-perusahaan" readonly type="text" name="alamat_perusahaan" class="form-control" placeholder="Dari Instansi / Organisasi" autocomplete="off">
 							</div>
 						</div>
 
@@ -130,9 +133,9 @@
 								<input id="alamat-desa" type="text" name="alamat_desa" class="form-control" placeholder="Dari Desa / Kelurahan" autocomplete="off">
 							</div>
 						</div>
-						<div class="mb-3 form-check mt-2">
-							<input type="checkbox" class="form-check-input" id="modalCheck">
-							<label class="form-check-label" for="modalCheck" required>Lihat pengumuman <span class="text-danger">*</span></label>
+						<div class="mb-3 form-check mt-3">
+							<input type="checkbox" class="form-check-input" id="modalCheck" required>
+							<label class="form-check-label" for="modalCheck">Data telah sesuai <span class="text-danger">*</span></label>
 						</div>
 						<br>
 						<div class="col-lg-12 mt-5">
@@ -151,12 +154,13 @@
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Pengumuman</h5>
+								<h5 class="modal-title" id="exampleModalLabel">Menyatakan data telah sesuai</h5>
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body text-justify">
-								Harap mengisi semua komponen dengan lengkap dan benar karena akan ada validasi saat registrasi ulang pada tanggal 5 Maret 2023 pukul 05.00 sampai 05.45 di Alun-alun Purwodadi.<br><br>
-								Mohon diingatkan untuk membawa Bukti pendaftaran yang terdapat QR Code dan KTP saat hari-H.
+								<b>Pengumuman:</b><br><br>
+								<b>1 : </b> Pastikan data telah lengkap dan benar karena akan ada validasi saat registrasi ulang pada tanggal 5 Maret 2023 pukul 05.00 sampai 05.45 di Alun-alun Purwodadi.<br><br>
+								<b>2 : </b> Harap membawa Bukti pendaftaran yang terdapat QR Code dan KTP / Kartu Identitas saat hari-H.
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

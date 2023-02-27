@@ -28,6 +28,7 @@ class Cms extends CI_Controller
     $data['undian'] = $this->db->get_where('undian', ['id_undian' => 1])->row();
     $data['user'] = $this->db->get_where('user', ['id_user' => $id])->row();
     $data['current'] = $this->peserta->getCurrentPeserta($mulai, $sampai)->result_array();
+    $data['current_total'] = $this->peserta->getCurrentPeserta($mulai, $sampai)->num_rows();
 
     $this->load->view('cms/templates/header', $data);
     $this->load->view('cms/dashboard');

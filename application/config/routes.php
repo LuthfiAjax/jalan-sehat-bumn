@@ -10,6 +10,8 @@ $route['undian'] = 'Welcome/undian';
 $route['daftar/peserta'] = 'Welcome/daftar';
 $route['bukti-daftar/(:any)'] = 'Welcome/bukti_daftar/$1';
 $route['kouta-daftar-terpenuhi'] = 'Welcome/limit';
+$route['cari'] = 'Welcome/cari_data';
+$route['Penuh'] = 'Welcome/limit';
 
 // tridparty
 $route['generate-barcode/(:any)'] = 'GenerateBarcode/generateBarcode/$1';
