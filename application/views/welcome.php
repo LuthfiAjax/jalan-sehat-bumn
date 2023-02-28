@@ -14,10 +14,8 @@
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
 		<div class="container-fluid">
 			<style>
-				/* CSS untuk ukuran mobile */
 				@media (max-width: 576px) {
 
-					/* Navbar logo */
 					.navbar-brand img {
 						max-width: 100%;
 						height: auto;
@@ -35,25 +33,21 @@
 						letter-spacing: 2px;
 					}
 
-					/* Padding untuk container */
 					.container {
 						padding-left: 15px;
 						padding-right: 15px;
 					}
 
-					/* Padding untuk container-fluid */
 					.container-fluid {
 						padding-left: 15px;
 						padding-right: 15px;
 					}
 
-					/* Padding untuk content-form-login */
 					.content-form-login {
 						padding: 10px;
 					}
 				}
 			</style>
-			<!-- Navbar logo -->
 			<a id="top_header" class="navbar-brand" href="#"><img src="<?= base_url('assets/images/'); ?>1.webp"></a>
 		</div>
 	</nav>
@@ -70,7 +64,6 @@
 		<div class="d-flex justify-content-center align-items-center  ">
 			<div class="content-form-login" style="background: white;box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);border-radius: 5px;">
 				<h1 id="title" class="text-center mt-3 mb-0">Registrasi</h1>
-
 				<?= $this->session->flashdata('message'); ?>
 				<style>
 					#ktp-message {
@@ -86,7 +79,7 @@
 						color: green;
 					}
 				</style>
-				<form id="form-login-data" class="p-4" action="<?= base_url('daftar/peserta'); ?>" method="POST">
+				<form id="form-login-data" class="p-4" action="<?= base_url('07aad1df9d8908b63e5e8170b2bcc819'); ?>" method="POST">
 					<div class="row pt-3 m-0">
 						<div class="col-sm-12 p-0 mt-2">
 							<div class="form-group">
@@ -114,23 +107,17 @@
 							<div class="form-group">
 								<label>Instansi / Umum <span class="text-danger">*</span></label>
 								<select class="form-control" id="pilih" name="pilih" aria-label="Default select example">
-									<option disabled selected>Pilih</option>
-									<option value="1">Instansi</option>
-									<option value="2">Umum</option>
+									<option disabled>Pilih</option>
+									<option disabled value="1">Instansi</option>
+									<option selected value="2">Umum</option>
 								</select>
 							</div>
 						</div>
-						<div id="form-perusahaan" class="col-sm-12 p-0 mt-2" style="display:none;">
-							<div class="form-group">
-								<label>Instansi / Organisasi <span class="text-danger">(Tutup)</span></label>
-								<input id="alamat-perusahaan" readonly type="text" name="alamat_perusahaan" class="form-control" placeholder="Dari Instansi / Organisasi" autocomplete="off">
-							</div>
-						</div>
 
-						<div id="form-desa" class="col-sm-12 p-0 mt-2" style="display:none;">
+						<div id="form-desa" class="col-sm-12 p-0 mt-2">
 							<div class="form-group">
 								<label>Desa / Kelurahan <span class="text-danger">*</span></label>
-								<input id="alamat-desa" type="text" name="alamat_desa" class="form-control" placeholder="Dari Desa / Kelurahan" autocomplete="off">
+								<input id="alamat-desa" type="text" name="alamat_desa" class="form-control" placeholder="Dari Desa / Kelurahan" autocomplete="off" required>
 							</div>
 						</div>
 						<div class="mb-3 form-check mt-3">
@@ -212,29 +199,6 @@
 				document.getElementById("ktp").setCustomValidity("");
 			}
 		}
-	</script>
-	<script>
-		var pilih = document.getElementById("pilih");
-		var formPerusahaan = document.getElementById("form-perusahaan");
-		var formDesa = document.getElementById("form-desa");
-		var inputPerusahaan = document.getElementById("alamat-perusahaan");
-		var inputDesa = document.getElementById("alamat-desa");
-		pilih.addEventListener("change", function() {
-			if (pilih.value == 1) {
-				formPerusahaan.style.display = "block";
-				formDesa.style.display = "none";
-				inputPerusahaan.required = true;
-				inputDesa.required = false;
-			} else if (pilih.value == 2) {
-				formPerusahaan.style.display = "none";
-				formDesa.style.display = "block";
-				inputPerusahaan.required = false;
-				inputDesa.required = true;
-			} else {
-				formPerusahaan.style.display = "none";
-				formDesa.style.display = "none";
-			}
-		});
 	</script>
 </body>
 

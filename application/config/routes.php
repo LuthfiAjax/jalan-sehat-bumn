@@ -7,11 +7,11 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['undian'] = 'Welcome/undian';
-$route['daftar/peserta'] = 'Welcome/daftar';
+$route['07aad1df9d8908b63e5e8170b2bcc819'] = 'Welcome/daftar';
 $route['bukti-daftar/(:any)'] = 'Welcome/bukti_daftar/$1';
 $route['kouta-daftar-terpenuhi'] = 'Welcome/limit';
 $route['cari'] = 'Welcome/cari_data';
-$route['Penuh'] = 'Welcome/limit';
+$route['3b4ddb688f47b39dea90c21a6a208093'] = 'Welcome/limit';
 
 // tridparty
 $route['generate-barcode/(:any)'] = 'GenerateBarcode/generateBarcode/$1';
